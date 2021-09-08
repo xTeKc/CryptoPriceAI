@@ -8,3 +8,7 @@ from sklearn.preprocessing import MinMaxScaler
 from tenserflow.keras.layers import Dense, Dropout, LSTM
 from tenserflow.keras.models import Sequential
 
+crypto = "BTC"
+
+fiat = "USD"
+
