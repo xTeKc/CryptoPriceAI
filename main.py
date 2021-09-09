@@ -11,12 +11,13 @@ from tenserflow.keras.models import Sequential
 crypto = "BTC"
 fiat = "USD"
 
-start_time = dt.datetime("INPUT START TIME")
-end_time = dt.datetime("INPUT END TIME")
+start_time = dt.datetime("INPUT START TIME") #set start time from creation date
+end_time = dt.datetime("INPUT END TIME") #set end time to current date
 
 data = web.DataReader(f"{crypto} - {fiat}", start_time, end_time)
 
 scaler = MinMaxScaler(feature_range=(0,1))
 scaled_data = scaler.fit_transform(data["Close"].values.reshape(-1,1))
 
-prediction_range = "IMPL PREDICTION RANGE"
+prediction_range = "IMPL PREDICTION RANGE" #set from creation date
+
