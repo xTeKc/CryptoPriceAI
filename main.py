@@ -13,3 +13,6 @@ fiat = "USD"
 
 start_time = dt.datetime("INPUT START TIME")
 end_time = dt.datetime("INPUT END TIME")
+
+data = web.DataReader(f"{crypto} - {fiat}", start_time, end_time)
+
