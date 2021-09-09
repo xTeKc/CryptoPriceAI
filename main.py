@@ -21,3 +21,5 @@ scaled_data = scaler.fit_transform(data["Close"].values.reshape(-1,1))
 
 prediction_range = "IMPL PREDICTION RANGE" #set from creation date
 
+x_train, y_train = [], []
+
