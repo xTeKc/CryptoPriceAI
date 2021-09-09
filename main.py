@@ -16,3 +16,6 @@ end_time = dt.datetime("INPUT END TIME")
 
 data = web.DataReader(f"{crypto} - {fiat}", start_time, end_time)
 
+scaler = MinMaxScaler(feature_range=(0,1))
+scaled_data = scaler.fit_transform(data["Close"].values.reshape(-1,1))
+
