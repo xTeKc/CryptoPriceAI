@@ -9,6 +9,7 @@ from tenserflow.keras.layers import Dense, Dropout, LSTM
 from tenserflow.keras.models import Sequential
 
 crypto = "BTC"
-
 fiat = "USD"
 
+start_time = dt.datetime("INPUT START TIME")
+end_time = dt.datetime("INPUT END TIME")
