@@ -16,6 +16,7 @@ end_time = dt.datetime("INPUT END TIME") #set end time to current date
 
 data = web.DataReader(f"{crypto} - {fiat}", start_time, end_time)
 
+#data prep
 scaler = MinMaxScaler(feature_range=(0,1))
 scaled_data = scaler.fit_transform(data["Close"].values.reshape(-1,1))
 
@@ -30,3 +31,20 @@ for x in range(prediction_range, len(scaled_data)):
 x_train, y_train = np.array(x_train), np.array(y_train)
 x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
 
+
+#neural network
+model = Sequential()
+
+model.add(LSTM(units=50, return_sequences=True, input_shape=(x_train.shape[1], 1)))
+model.add(Dropout(0, 2))
+model.add(LSTM(units=50, return_sequences=True))
+model.add(Dropout(0, 2))
+model.add(LSTM(units=50))
+model.add(Dropout(0, 2))
+model.Dense(units=1)
+
+model.compile(optimizer="", loss="")
+model.fit(x_train, y_train, epochs=25, batch_size=32)
+
+
+#test model
