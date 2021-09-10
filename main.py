@@ -11,8 +11,8 @@ from tenserflow.keras.models import Sequential
 crypto = "BTC"
 fiat = "USD"
 
-start_time = dt.datetime("INPUT START TIME") #set start time from creation date
-end_time = dt.datetime("INPUT END TIME") #set end time to current date
+start_time = dt.datetime(2009,1,1) #set start time from creation date
+end_time = dt.datetime.now()
 
 data = web.DataReader(f"{crypto} - {fiat}", start_time, end_time)
 
@@ -20,13 +20,14 @@ data = web.DataReader(f"{crypto} - {fiat}", start_time, end_time)
 scaler = MinMaxScaler(feature_range=(0,1))
 scaled_data = scaler.fit_transform(data["Close"].values.reshape(-1,1))
 
-prediction_range = "IMPL PREDICTION RANGE" #set from creation date
+prediction_range = 60
+# future_prediction_range = 30 #30th day after 60 days
 
 x_train, y_train = [], []
 
-for x in range(prediction_range, len(scaled_data)):
+for x in range(prediction_range, len(scaled_data)): # len(scaled_data)-future_prediction_range):
 	x_train.append(scaled_data[x_prediction_days:x, 0])
-	y_train.append(scaled_data[x, 0])
+	y_train.append(scaled_data[x, 0]) # append(scaled_data[x+future_prediction_range, 0])
 
 x_train, y_train = np.array(x_train), np.array(y_train)
 x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
@@ -48,7 +49,7 @@ model.fit(x_train, y_train, epochs=25, batch_size=32)
 
 
 #test model
-test_start = dt.datetime("INPUT START TIME")
+test_start = dt.datetime(2020,1,1) #start date for test data
 test_end = dt.datetime.now()
 
 test_data = web.DataReader(f"{crypto} - {fiat}", test_start, test_end)
@@ -80,13 +81,13 @@ plt.legend(loc="upper left")
 plt.show()
 
 #predict next day?
-real_data = [model_inputs[len(model_inputs) + 1 - prediction_range:len(model_inputs) + 1, 0]]
-real_data = np.array(real_data)
-real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1)) 
+# real_data = [model_inputs[len(model_inputs) + 1 - prediction_range:len(model_inputs) + 1, 0]]
+# real_data = np.array(real_data)
+# real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1)) 
 
-prediction = model.predict(real_data)
-prediction = scaler.inverse_transform(prediction)
-print(f"{fiat}")
+# prediction = model.predict(real_data)
+# prediction = scaler.inverse_transform(prediction)
+# print(f"{fiat}") #print prediction in USD
 
 
 
