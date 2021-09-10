@@ -79,6 +79,11 @@ plt.ylabel("Price")
 plt.legend(loc="upper left")
 plt.show()
 
+#predict next day?
+real_data = [model_inputs[len(model_inputs) + 1 - prediction_range:len(model_inputs) + 1, 0]]
+real_data = np.array(real_data)
+real_data = np.reshape(real_data, (real_data.shape[0], real_data.shape[1], 1)) 
+
 
 
 
