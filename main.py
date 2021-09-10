@@ -50,3 +50,5 @@ model.fit(x_train, y_train, epochs=25, batch_size=32)
 #test model
 test_start = dt.datetime("INPUT START TIME")
 test_end = dt.datetime.now()
+
+test_data = web.DataReader(f"{crypto} - {fiat}", test_start, test_end)
