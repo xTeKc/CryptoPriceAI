@@ -54,6 +54,9 @@ test_end = dt.datetime.now()
 test_data = web.DataReader(f"{crypto} - {fiat}", test_start, test_end)
 real_prices = test_data["Close"].values
 
+dataset_total = pd.concat((data["Close"], test_data["Close"]), axis=0)
+
+
 
 
 
