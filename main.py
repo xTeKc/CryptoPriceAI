@@ -68,6 +68,9 @@ for x in range(prediction_range, len(model_inputs)):
 x_test = np.array(x_test)
 x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
 
+prediction_prices = model.predict(x_test)
+prediction_prices = scaler.inverse_transform(prediction_prices)
+
 
 
 
