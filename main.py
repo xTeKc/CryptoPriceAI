@@ -56,6 +56,9 @@ real_prices = test_data["Close"].values
 
 dataset_total = pd.concat((data["Close"], test_data["Close"]), axis=0)
 
+model_inputs = dataset_total[len(dataset_total) - len(test_data) - prediction_range:].values
+model_inputs = model_inputs.reshape(-1, 1)
+model_inputs = scaler.fit_transform(model_inputs)
 
 
 
