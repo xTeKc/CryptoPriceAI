@@ -60,6 +60,11 @@ model_inputs = dataset_total[len(dataset_total) - len(test_data) - prediction_ra
 model_inputs = model_inputs.reshape(-1, 1)
 model_inputs = scaler.fit_transform(model_inputs)
 
+x_test = []
+
+for x in range(prediction_range, len(model_inputs)):
+	x_test.append(model_inputs[x_prediction_days:x, 0])
+
 
 
 
